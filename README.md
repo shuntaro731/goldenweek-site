@@ -1,5 +1,3 @@
-# Astro Starter Kit: Basics
-
 ```sh
 bun create astro@latest -- --template basics
 ```
