@@ -1,31 +1,12 @@
 ---
-import title1 from "../assets/title/type=title1.svg";
-import title2 from "../assets/title/type=title2.svg";
-import title3 from "../assets/title/type=title3.svg";
-
-type TitleType = "title1" | "title2" | "title3";
+import title from "../assets/title/type=title1.svg";
 
 interface Props {
-  type?: TitleType;
-  label?: string;
   color?: string;
   class?: string;
 }
 
-const titles = {
-  title1,
-  title2,
-  title3,
-};
-
-const {
-  type = "title1",
-  label = "青森県立美術館",
-  color,
-  class: className,
-} = Astro.props;
-
-const title = titles[type];
+const { color, class: className } = Astro.props;
 const style = [
   `--title-url: url("${title.src}")`,
   `--title-ratio: ${title.width} / ${title.height}`,
@@ -38,7 +19,7 @@ const style = [
 <span
   class:list={["title-svg", className]}
   role="img"
-  aria-label={label}
+  aria-label="青森県立美術館"
   style={style}
 >
 </span>

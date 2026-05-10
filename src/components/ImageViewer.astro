@@ -1,0 +1,68 @@
+---
+interface ImageItem {
+  src: string;
+  alt?: string;
+}
+
+interface Props {
+  images: ImageItem[];
+  interval?: number;
+}
+
+const { images, interval = 4000 } = Astro.props;
+---
+
+<div class="image-viewer absolute inset-0" aria-hidden="true" data-image-viewer>
+  {
+    images.map((image, index) => (
+      <img
+        class:list={[
+          "image-viewer__slide absolute inset-0 size-full object-cover",
+          index === 0 && "is-active",
+        ]}
+        src={image.src}
+        alt={image.alt ?? ""}
+        loading={index === 0 ? "eager" : "lazy"}
+        decoding="async"
+        data-image-viewer-slide
+      />
+    ))
+  }
+</div>
+
+<script define:vars={{ interval }}>
+  document.querySelectorAll("[data-image-viewer]").forEach((viewer) => {
+    const slides = [...viewer.querySelectorAll("[data-image-viewer-slide]")];
+    let activeIndex = 0;
+
+    const setActive = (nextIndex) => {
+      activeIndex = nextIndex;
+
+      slides.forEach((slide, index) => {
+        slide.classList.toggle("is-active", index === activeIndex);
+      });
+
+      viewer.dispatchEvent(
+        new CustomEvent("imageviewer:change", {
+          bubbles: true,
+          detail: { index: activeIndex },
+        }),
+      );
+    };
+
+    window.setInterval(() => {
+      setActive((activeIndex + 1) % slides.length);
+    }, interval);
+  });
+</script>
+
+<style>
+  .image-viewer__slide {
+    opacity: 0;
+    transition: opacity 900ms ease;
+  }
+
+  .image-viewer__slide.is-active {
+    opacity: 1;
+  }
+</style>

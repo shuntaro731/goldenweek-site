@@ -1,0 +1,117 @@
+---
+import ImageViewer from "../ImageViewer.astro";
+import aomoriImage from "../../assets/museum/青森美術館.jpg";
+import musashinoImage from "../../assets/museum/武蔵野美術館.jpg";
+import chichuImage from "../../assets/museum/地中美術館.jpg";
+import titleAomori from "../../assets/title/type=title1.svg";
+import titleMusashino from "../../assets/title/type=title2.svg";
+import titleChichu from "../../assets/title/type=title3.svg";
+
+const museums = [
+  {
+    name: "青森県立美術館",
+    englishName: "AOMORI KENRITU BIJYUTUKAN",
+    description:
+      "青森の自然とアートの融合、魅力的な展示を中心に常設展示も楽しめる、",
+    note: "おすすめスポット。一回は行ってみたい",
+    image: aomoriImage,
+    title: titleAomori,
+  },
+  {
+    name: "武蔵野美術館",
+    englishName: "MUSASHINO ART MUSEUM",
+    description:
+      "多彩なコレクションと企画展示を通して、アートとデザインの魅力に触れられる、",
+    note: "ゆっくり巡りたい美術館",
+    image: musashinoImage,
+    title: titleMusashino,
+  },
+  {
+    name: "地中美術館",
+    englishName: "CHICHU ART MUSEUM",
+    description:
+      "建築と自然光が作品の見え方を変える、瀬戸内ならではの体験ができる、",
+    note: "一度は訪れたい特別な空間",
+    image: chichuImage,
+    title: titleChichu,
+  },
+];
+
+const museumImages = museums.map((museum) => ({
+  src: museum.image.src,
+  alt: museum.name,
+}));
+---
+
+<section class="flex flex-1 bg-[#f3f2e8] pl-16" aria-label="おすすめ美術館">
+  <div id="hero-museum" class="relative flex-1 overflow-hidden bg-[#1a1a18]">
+    <ImageViewer images={museumImages} interval={4000} />
+    <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
+
+    <div class="absolute right-18 bottom-18 w-110 text-right">
+      <span
+        class="hero-title ml-auto block w-full text-white"
+        role="img"
+        aria-label={museums[0].name}
+        style={`--title-url: url("${museums[0].title.src}");`}
+        data-hero-title
+      />
+      <p
+        class="mt-4 text-base tracking-wide text-white/90"
+        data-hero-english-name
+      >
+        {museums[0].englishName}
+      </p>
+      <div class="mt-7 border-t border-white/70"></div>
+      <p class="mt-6 text-base leading-7 font-bold text-white" data-hero-copy>
+        {museums[0].description}<br />
+        {museums[0].note}
+      </p>
+    </div>
+
+    <div class="absolute bottom-20 left-18 flex items-center gap-4 text-xl font-bold text-white">
+      <span data-hero-current>01</span>
+      <span class="w-10 border-t border-white"></span>
+      <span>{String(museums.length).padStart(2, "0")}</span>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ museums }}>
+  const hero = document.querySelector("#hero-museum");
+  const title = document.querySelector("[data-hero-title]");
+  const current = document.querySelector("[data-hero-current]");
+  const englishName = document.querySelector("[data-hero-english-name]");
+  const copy = document.querySelector("[data-hero-copy]");
+
+  const setActive = (nextIndex) => {
+    const museum = museums[nextIndex];
+
+    if (title) {
+      title.style.setProperty("--title-url", `url("${museum.title.src}")`);
+      title.setAttribute("aria-label", museum.name);
+    }
+    if (current) current.textContent = String(nextIndex + 1).padStart(2, "0");
+    if (englishName) englishName.textContent = museum.englishName;
+    if (copy) copy.innerHTML = `${museum.description}<br>${museum.note}`;
+  };
+
+  hero?.addEventListener("imageviewer:change", (event) => {
+    setActive(event.detail.index);
+  });
+</script>
+
+<style>
+  .hero-title {
+    height: 47px;
+    background-color: currentColor;
+    mask-image: var(--title-url);
+    mask-position: right center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    -webkit-mask-image: var(--title-url);
+    -webkit-mask-position: right center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+  }
+</style>
