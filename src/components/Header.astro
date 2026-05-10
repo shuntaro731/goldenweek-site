@@ -1,0 +1,67 @@
+---
+import logo from "../assets/logo.svg";
+---
+
+<header class="relative flex items-center justify-between bg-[#f3f2e8] px-6 py-8 md:px-[72px] md:py-16">
+  <a href="/" aria-label="トップページへ">
+    <img
+      class="w-[180px] md:w-[211px]"
+      src={logo.src}
+      alt="このゴールデンウィークは 日本の美術館へ"
+    />
+  </a>
+
+  <nav class="relative" aria-label="グローバルナビゲーション">
+    <button
+      id="menu-button"
+      class="grid size-11 place-items-center text-[#1a1a18] md:size-12"
+      type="button"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      aria-controls="site-menu"
+    >
+      <svg
+        class="size-10 md:size-12"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+        />
+      </svg>
+    </button>
+
+    <div
+      id="site-menu"
+      class="absolute top-full right-0 mt-6 min-w-40 bg-[#1a1a18] px-5 py-4 text-right"
+      hidden
+    >
+      <a class="font-bold text-[#f3f2e8] no-underline" href="/">Top</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const menuButton = document.querySelector<HTMLButtonElement>("#menu-button");
+  const menu = document.querySelector<HTMLElement>("#site-menu");
+
+  menuButton?.addEventListener("click", () => {
+    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+
+    menuButton.setAttribute("aria-expanded", String(!isOpen));
+    menuButton.setAttribute(
+      "aria-label",
+      isOpen ? "メニューを開く" : "メニューを閉じる",
+    );
+
+    if (menu) {
+      menu.hidden = isOpen;
+    }
+  });
+</script>

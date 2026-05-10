@@ -1,1 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Outfit", "Zen Kaku Gothic New", "zen-kaku-gothic-new",
+    "zen-kaku-gothic", sans-serif;
+}
+
+:root {
+  font-family:
+    "Outfit", "Zen Kaku Gothic New", "zen-kaku-gothic-new",
+    "zen-kaku-gothic", sans-serif;
+}
+
+body {
+  font-family: inherit;
+}
