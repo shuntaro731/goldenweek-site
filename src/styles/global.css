@@ -8,11 +8,18 @@
 }
 
 :root {
+  --color-index-background: #f0f0e4;
+
   font-family:
     "Outfit", "Zen Kaku Gothic New", "zen-kaku-gothic-new",
     "zen-kaku-gothic", sans-serif;
 }
 
 body {
+  background-color: var(--color-index-background);
   font-family: inherit;
+}
+
+.index-background {
+  background-color: var(--color-index-background);
 }

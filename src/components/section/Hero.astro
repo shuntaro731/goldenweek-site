@@ -12,8 +12,7 @@ const museums = [
     name: "青森県立美術館",
     englishName: "AOMORI KENRITU BIJYUTUKAN",
     description:
-      "青森の自然とアートの融合、魅力的な展示を中心に常設展示も楽しめる、",
-    note: "おすすめスポット。一回は行ってみたい",
+      "青森の自然とアートの融合、魅力的な展示を中心に常設展示も楽しめる、おすすめスポット。一回は行ってみたい",
     image: aomoriImage,
     title: titleAomori,
   },
@@ -21,8 +20,7 @@ const museums = [
     name: "武蔵野美術館",
     englishName: "MUSASHINO ART MUSEUM",
     description:
-      "多彩なコレクションと企画展示を通して、アートとデザインの魅力に触れられる、",
-    note: "ゆっくり巡りたい美術館",
+      "多彩なコレクションと企画展示を通して、アートとデザインの魅力に触れられる、ゆっくり巡りたい美術館",
     image: musashinoImage,
     title: titleMusashino,
   },
@@ -30,8 +28,7 @@ const museums = [
     name: "地中美術館",
     englishName: "CHICHU ART MUSEUM",
     description:
-      "建築と自然光が作品の見え方を変える、瀬戸内ならではの体験ができる、",
-    note: "一度は訪れたい特別な空間",
+      "建築と自然光が作品の見え方を変える、瀬戸内ならではの体験ができる、一度は訪れたい特別な空間",
     image: chichuImage,
     title: titleChichu,
   },
@@ -43,7 +40,10 @@ const museumImages = museums.map((museum) => ({
 }));
 ---
 
-<section class="flex flex-1 bg-[#f3f2e8] pl-16" aria-label="おすすめ美術館">
+<section
+  class="flex h-full shrink-0 bg-[#f3f2e8] pl-16"
+  aria-label="おすすめ美術館"
+>
   <div id="hero-museum" class="relative flex-1 overflow-hidden bg-[#1a1a18]">
     <ImageViewer images={museumImages} interval={4000} />
     <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
@@ -57,22 +57,21 @@ const museumImages = museums.map((museum) => ({
         data-hero-title
       />
       <p
-        class="mt-4 text-base tracking-wide text-white/90"
+        class="mt-4 text-base tracking-wide text-white/90 font-extralight"
         data-hero-english-name
       >
         {museums[0].englishName}
       </p>
       <div class="mt-7 border-t border-white/70"></div>
-      <p class="mt-6 text-base leading-7 font-bold text-white" data-hero-copy>
+      <p class="mt-6 text-sm leading-7 font-medium text-white" data-hero-copy>
         {museums[0].description}<br />
-        {museums[0].note}
       </p>
     </div>
 
-    <div class="absolute bottom-20 left-18 flex items-center gap-4 text-xl font-bold text-white">
+    <div class="absolute bottom-20 left-18 flex items-center gap-4 text-lg font-light text-white">
       <span data-hero-current>01</span>
-      <span class="w-10 border-t border-white"></span>
-      <span>{String(museums.length).padStart(2, "0")}</span>
+      <span class="w-10 border-t border-white" aria-hidden="true"></span>
+      <span data-hero-total>{String(museums.length).padStart(2, "0")}</span>
     </div>
   </div>
 </section>
@@ -93,7 +92,7 @@ const museumImages = museums.map((museum) => ({
     }
     if (current) current.textContent = String(nextIndex + 1).padStart(2, "0");
     if (englishName) englishName.textContent = museum.englishName;
-    if (copy) copy.innerHTML = `${museum.description}<br>${museum.note}`;
+    if (copy) copy.textContent = museum.description;
   };
 
   hero?.addEventListener("imageviewer:change", (event) => {
