@@ -7,6 +7,7 @@ import titleAomori from "../../assets/title/type=title1.svg";
 import titleMusashino from "../../assets/title/type=title2.svg";
 import titleChichu from "../../assets/title/type=title3.svg";
 
+// ImageViewerの中要素
 const museums = [
   {
     name: "青森県立美術館",
@@ -48,42 +49,43 @@ const museumImages = museums.map((museum) => ({
     <ImageViewer images={museumImages} interval={4000} />
     <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
 
-    <div class="absolute right-18 bottom-18 w-110 text-right">
-      <span
-        class="hero-title hero-blur-fade ml-auto block w-full text-white"
-        role="img"
-        aria-label={museums[0].name}
-        style={`--title-url: url("${museums[0].title.src}");`}
-        data-hero-title
-      />
-      <p
-        class="hero-blur-fade mt-4 text-base tracking-wide text-white/90 font-extralight"
-        style="--blur-fade-delay: 40ms;"
-        data-hero-english-name
-      >
-        {museums[0].englishName}
-      </p>
+    <div class="absolute inset-x-18 bottom-18 flex items-end justify-between gap-24">
       <div
-        class="hero-blur-fade mt-7 border-t border-white/70"
-        style="--blur-fade-delay: 80ms;"
+        class="hero-blur-fade flex items-center gap-4 text-lg font-light text-white"
+        style="--blur-fade-delay: 160ms;"
       >
+        <span data-hero-current>01</span>
+        <span class="w-10 border-t border-white" aria-hidden="true"></span>
+        <span data-hero-total>{String(museums.length).padStart(2, "0")}</span>
       </div>
-      <p
-        class="hero-blur-fade mt-6 text-sm leading-7 font-medium text-white"
-        style="--blur-fade-delay: 120ms;"
-        data-hero-copy
-      >
-        {museums[0].description}<br />
-      </p>
-    </div>
 
-    <div
-      class="hero-blur-fade absolute bottom-20 left-18 flex items-center gap-4 text-lg font-light text-white"
-      style="--blur-fade-delay: 160ms;"
-    >
-      <span data-hero-current>01</span>
-      <span class="w-10 border-t border-white" aria-hidden="true"></span>
-      <span data-hero-total>{String(museums.length).padStart(2, "0")}</span>
+      <section class="w-110 text-right">
+        <span
+          class="hero-title hero-blur-fade ml-auto block w-full text-white"
+          role="img"
+          aria-label={museums[0].name}
+          style={`--title-url: url("${museums[0].title.src}");`}
+          data-hero-title></span>
+        <p
+          class="hero-blur-fade mt-4 text-base tracking-wide text-white/90 font-extralight"
+          style="--blur-fade-delay: 40ms;"
+          data-hero-english-name
+        >
+          {museums[0].englishName}
+        </p>
+        <div
+          class="hero-blur-fade mt-7 border-t border-white/70"
+          style="--blur-fade-delay: 80ms;"
+        >
+        </div>
+        <p
+          class="hero-blur-fade mt-6 text-sm leading-7 font-medium text-white"
+          style="--blur-fade-delay: 120ms;"
+          data-hero-copy
+        >
+          {museums[0].description}<br />
+        </p>
+      </section>
     </div>
   </div>
 </section>
@@ -123,7 +125,7 @@ const museumImages = museums.map((museum) => ({
           item.classList.remove("is-blur-hidden");
         });
       });
-    }, 220);
+    }, 320);
   });
 </script>
 
@@ -133,9 +135,9 @@ const museumImages = museums.map((museum) => ({
     filter: blur(0);
     transform: translateY(0);
     transition:
-      opacity 400ms ease-out var(--blur-fade-delay, 0ms),
-      filter 400ms ease-out var(--blur-fade-delay, 0ms),
-      transform 400ms ease-out var(--blur-fade-delay, 0ms);
+      opacity 600ms ease-out var(--blur-fade-delay, 0ms),
+      filter 600ms ease-out var(--blur-fade-delay, 0ms),
+      transform 600ms ease-out var(--blur-fade-delay, 0ms);
     will-change: opacity, filter, transform;
   }
 
