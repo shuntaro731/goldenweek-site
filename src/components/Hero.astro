@@ -1,5 +1,5 @@
 ---
-import title from "../assets/title/type=title1.svg";
+import TitleSvg from "./TitleSvg.astro";
 ---
 
 <section class="flex min-h-0 flex-1 bg-[#f3f2e8] pr-0 pl-6 md:pl-[72px]">
@@ -8,16 +8,14 @@ import title from "../assets/title/type=title1.svg";
     <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
 
     <div class="absolute right-6 bottom-[72px] w-[min(440px,calc(100%-48px))] text-right md:right-[72px] md:bottom-[78px]">
-      <img
-        class="ml-auto w-full"
-        src={title.src}
-        alt="青森県立美術館"
-      />
+      <TitleSvg class="ml-auto w-full text-white" />
       <p class="mt-4 text-[15px] tracking-wide text-white/90">AOMORI KENRITU BIJYUTUKAN</p>
       <div class="mt-7 h-px bg-white/70"></div>
       <p class="mt-6 text-[15px] leading-7 font-bold text-white">
-        青森の自然とアートの融合、魅力的な展示を中心に常設展示も楽しめる、<br class="hidden md:block" />
-        おすすめスポット。一回は行ってみたい
+        青森の自然とアートの融合、魅力的な展示を中心に常設展示も楽しめる、
+        <p>
+          おすすめスポット。一回は行ってみたい
+        </p>
       </p>
     </div>
 
