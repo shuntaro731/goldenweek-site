@@ -50,25 +50,37 @@ const museumImages = museums.map((museum) => ({
 
     <div class="absolute right-18 bottom-18 w-110 text-right">
       <span
-        class="hero-title ml-auto block w-full text-white"
+        class="hero-title hero-blur-fade ml-auto block w-full text-white"
         role="img"
         aria-label={museums[0].name}
         style={`--title-url: url("${museums[0].title.src}");`}
         data-hero-title
       />
       <p
-        class="mt-4 text-base tracking-wide text-white/90 font-extralight"
+        class="hero-blur-fade mt-4 text-base tracking-wide text-white/90 font-extralight"
+        style="--blur-fade-delay: 40ms;"
         data-hero-english-name
       >
         {museums[0].englishName}
       </p>
-      <div class="mt-7 border-t border-white/70"></div>
-      <p class="mt-6 text-sm leading-7 font-medium text-white" data-hero-copy>
+      <div
+        class="hero-blur-fade mt-7 border-t border-white/70"
+        style="--blur-fade-delay: 80ms;"
+      >
+      </div>
+      <p
+        class="hero-blur-fade mt-6 text-sm leading-7 font-medium text-white"
+        style="--blur-fade-delay: 120ms;"
+        data-hero-copy
+      >
         {museums[0].description}<br />
       </p>
     </div>
 
-    <div class="absolute bottom-20 left-18 flex items-center gap-4 text-lg font-light text-white">
+    <div
+      class="hero-blur-fade absolute bottom-20 left-18 flex items-center gap-4 text-lg font-light text-white"
+      style="--blur-fade-delay: 160ms;"
+    >
       <span data-hero-current>01</span>
       <span class="w-10 border-t border-white" aria-hidden="true"></span>
       <span data-hero-total>{String(museums.length).padStart(2, "0")}</span>
@@ -82,6 +94,8 @@ const museumImages = museums.map((museum) => ({
   const current = document.querySelector("[data-hero-current]");
   const englishName = document.querySelector("[data-hero-english-name]");
   const copy = document.querySelector("[data-hero-copy]");
+  const blurFadeItems = [...document.querySelectorAll(".hero-blur-fade")];
+  let contentTimer;
 
   const setActive = (nextIndex) => {
     const museum = museums[nextIndex];
@@ -96,11 +110,42 @@ const museumImages = museums.map((museum) => ({
   };
 
   hero?.addEventListener("imageviewer:change", (event) => {
-    setActive(event.detail.index);
+    window.clearTimeout(contentTimer);
+    blurFadeItems.forEach((item) => {
+      item.classList.add("is-blur-hidden");
+    });
+
+    contentTimer = window.setTimeout(() => {
+      setActive(event.detail.index);
+
+      window.requestAnimationFrame(() => {
+        blurFadeItems.forEach((item) => {
+          item.classList.remove("is-blur-hidden");
+        });
+      });
+    }, 220);
   });
 </script>
 
 <style>
+  .hero-blur-fade {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+    transition:
+      opacity 400ms ease-out var(--blur-fade-delay, 0ms),
+      filter 400ms ease-out var(--blur-fade-delay, 0ms),
+      transform 400ms ease-out var(--blur-fade-delay, 0ms);
+    will-change: opacity, filter, transform;
+  }
+
+  .hero-blur-fade.is-blur-hidden {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(-6px);
+    transition-delay: 0ms;
+  }
+
   .hero-title {
     height: 47px;
     background-color: currentColor;
