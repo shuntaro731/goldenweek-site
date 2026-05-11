@@ -13,6 +13,7 @@ const { images, interval = 4000 } = Astro.props;
 ---
 
 <div class="image-viewer absolute inset-0" aria-hidden="true" data-image-viewer>
+  <!-- 最初の画像の読み込みを優先させ2枚目以降はlazyに -->
   {
     images.map((image, index) => (
       <img
@@ -50,6 +51,7 @@ const { images, interval = 4000 } = Astro.props;
       );
     };
 
+    // ループ処理
     window.setInterval(() => {
       setActive((activeIndex + 1) % slides.length);
     }, interval);
@@ -60,10 +62,12 @@ const { images, interval = 4000 } = Astro.props;
   /* 画像の切り替えトランジション  */
   .image-viewer__slide {
     opacity: 0;
-    transition: opacity 900ms ease;
+    transform: scale(1);
+    transition: opacity 900ms ease, transform 600ms ease;
   }
 
   .image-viewer__slide.is-active {
+    transform: scale(1.05);
     opacity: 1;
   }
 </style>

@@ -10,6 +10,7 @@ import logo from "../assets/logo.svg";
     />
   </a>
 
+  <!-- メニューバー -->
   <nav class="relative" aria-label="グローバルナビゲーション">
     <button
       id="menu-button"
@@ -36,6 +37,7 @@ import logo from "../assets/logo.svg";
       </svg>
     </button>
 
+    <!-- 展開nav -->
     <div
       id="site-menu"
       class="absolute top-full right-0 mt-6 min-w-40 bg-[#1a1a18] px-5 py-4 text-right"
@@ -47,6 +49,7 @@ import logo from "../assets/logo.svg";
 </header>
 
 <script>
+  // メニューバー開閉状態の取得
   const menuButton = document.querySelector<HTMLButtonElement>("#menu-button");
   const menu = document.querySelector<HTMLElement>("#site-menu");
 

@@ -1,16 +1,16 @@
 ---
-import introductionImage from "../../assets/tokyo_museum.png";
+import introductionImage from "../../assets/IMG_1165 1.png";
 ---
 
 <section
-  class="mt-16 bg-white px-30 py-30 text-neutral-950"
+  class="mt-16 bg-[#f4f4ef] px-30 py-30 text-neutral-950"
   aria-labelledby="introduction-title"
 >
   <div class="mx-auto grid max-w-7xl grid-cols-2 items-center gap-24">
     <div class="max-w-lg">
       <!-- 文字要素 -->
       <p
-        class="mb-4 text-center text-sm font-medium tracking-widest text-neutral-500"
+        class="mb-4 text-center text-sm font-medium tracking-widest text-neutral-400"
       >
         （はじめに）
       </p>
@@ -34,11 +34,12 @@ import introductionImage from "../../assets/tokyo_museum.png";
       class="relative aspect-square w-full max-w-xl justify-self-end overflow-hidden bg-neutral-300"
     >
       <img
-        class="size-full object-cover"
+        class="introduction-parallax-image size-full object-cover"
         src={introductionImage.src}
-        alt="美術館で撮影した写真"
+        alt="去年行った美術館で撮影した写真"
         loading="lazy"
         decoding="async"
+        data-introduction-parallax
       />
       <figcaption
         class="absolute right-6 bottom-6 text-sm font-normal tracking-wide text-white"
@@ -48,3 +49,45 @@ import introductionImage from "../../assets/tokyo_museum.png";
     </figure>
   </div>
 </section>
+
+<script>
+  const parallaxImage = document.querySelector<HTMLImageElement>(
+    "[data-introduction-parallax]",
+  );
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let frameId: number | null = null;
+
+  const updateParallax = () => {
+    frameId = null;
+
+    if (!parallaxImage || reduceMotion.matches) return;
+
+    const frame = parallaxImage.parentElement;
+    if (!frame) return;
+
+    const rect = frame.getBoundingClientRect();
+    const viewportCenter = window.innerHeight / 2;
+    const frameCenter = rect.top + rect.height / 2;
+    const progress = (frameCenter - viewportCenter) / window.innerHeight;
+    const offset = Math.max(-1, Math.min(1, progress)) * -8;
+
+    parallaxImage.style.transform = `translate3d(0, ${offset}%, 0) scale(1.1)`;
+  };
+
+  const requestParallaxUpdate = () => {
+    if (frameId !== null) return;
+    frameId = window.requestAnimationFrame(updateParallax);
+  };
+
+  window.addEventListener("scroll", requestParallaxUpdate, { passive: true });
+  window.addEventListener("resize", requestParallaxUpdate);
+  updateParallax();
+</script>
+
+<style>
+  .introduction-parallax-image {
+    transform: translate3d(0, 0, 0) scale(1.1);
+    transform-origin: center;
+    will-change: transform;
+  }
+</style>
