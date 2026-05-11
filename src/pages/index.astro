@@ -2,13 +2,12 @@
 // URLになる場所`about.astro`なら`/about`になる
 import Hero from "../components/section/Hero.astro";
 import Introduction from "../components/section/Introduction.astro";
-import Contents from "../components/Contents/Contents.astro";
+import Contents from "../components/section/Contents.astro";
 import Layout from "../layouts/Layout.astro";
-import { museums } from "../data/museums";
 ---
 
 <Layout>
   <Hero />
   <Introduction />
-  <Contents items={museums} />
+  <Contents />
 </Layout>

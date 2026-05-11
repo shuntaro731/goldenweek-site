@@ -1,0 +1,40 @@
+---
+import ContentArticle from "./ContentArticle.astro";
+import type { Museum } from "../../data/museums";
+import { museums } from "../../data/museums";
+
+interface Props {
+  items?: Museum[];
+}
+
+const { items = museums } = Astro.props;
+---
+
+<section
+  class="bg-[#f4f4ef] py-[clamp(88px,11vw,176px)] pb-[clamp(96px,12vw,192px)] text-[#1a1a18]"
+  aria-labelledby="contents-title"
+>
+  <div class="mx-auto w-[min(100%,1440px)]">
+    <header
+      class="mx-[clamp(24px,7vw,112px)] mb-[clamp(72px,8vw,128px)] border-t border-[#1a1a18] pt-[clamp(24px,3vw,44px)]"
+    >
+      <p class="mb-3.5 text-xs font-bold tracking-[0.14em] uppercase">
+        Museum Contents
+      </p>
+      <h2
+        id="contents-title"
+        class="m-0 text-[clamp(2rem,6vw,5.5rem)] leading-[0.95] font-extrabold"
+      >
+        行ってみたい美術館
+      </h2>
+    </header>
+
+    <div class="grid gap-[clamp(88px,11vw,176px)]">
+      {
+        items.map((item, index) => (
+          <ContentArticle item={item} index={index} total={items.length} />
+        ))
+      }
+    </div>
+  </div>
+</section>

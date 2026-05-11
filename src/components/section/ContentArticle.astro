@@ -1,0 +1,103 @@
+---
+import type { Museum } from "../../data/museums";
+
+interface Props {
+  item: Museum;
+  index: number;
+  total: number;
+}
+
+const { item, index, total } = Astro.props;
+const number = String(index + 1).padStart(2, "0");
+const totalCount = String(total).padStart(2, "0");
+---
+
+<article
+  class="mx-[clamp(24px,7vw,112px)]"
+  aria-labelledby={`content-title-${index}`}
+>
+  <header class="min-w-0">
+    <p class="mb-7 flex items-baseline gap-1.5 font-bold tracking-[0.02em]">
+      <span class="text-[clamp(1rem,1.7vw,1.5rem)]">#</span>
+      <span class="text-[clamp(2rem,4vw,4rem)] leading-none">{number}</span>
+      <span class="text-[clamp(1rem,1.7vw,1.5rem)] text-neutral-500">
+        /{totalCount}
+      </span>
+    </p>
+    <h3 id={`content-title-${index}`} class="sr-only">{item.name}</h3>
+    <img
+      class="block max-h-[clamp(70px,8vw,128px)] w-[min(100%,620px)] object-contain object-left"
+      src={item.titleSvg.src}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      aria-hidden="true"
+    />
+    <p
+      class="mt-4 text-[clamp(0.875rem,1.2vw,1.25rem)] font-extrabold tracking-[-0.03em]"
+    >
+      {item.englishName}
+    </p>
+  </header>
+
+  <div class="ml-[clamp(0px,5vw,140px)] mt-[clamp(64px,8vw,120px)] border-t-2 border-[#1a1a18] pt-[clamp(64px,8vw,112px)]">
+    <div class="grid items-start gap-[clamp(40px,8vw,112px)] lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
+      <figure class="m-0 min-w-0">
+        <img
+          class="block aspect-[1.48/1] w-full object-cover"
+          src={item.image.src}
+          alt={item.name}
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="sr-only">{item.caption}</figcaption>
+      </figure>
+
+      <div class="min-w-0 pt-1">
+        <p class="m-0 text-[clamp(1.5rem,2.4vw,2.5rem)] leading-[1.55] font-extrabold tracking-[-0.03em]">
+          {item.headline}
+        </p>
+        <p class="mt-8 text-[clamp(0.875rem,1vw,1rem)] leading-[1.9] font-medium tracking-[0.04em]">
+          {item.body}
+        </p>
+
+        <dl class="mt-10 border-y border-dashed border-[#1a1a18] py-5">
+          {
+            item.details.map((detail) => (
+              <div class="grid grid-cols-[6em_1fr] gap-4 py-1.5 text-[clamp(0.8125rem,0.9vw,0.9375rem)] leading-[1.7]">
+                <dt class="font-extrabold">{detail.label}</dt>
+                <dd class="m-0 font-medium">{detail.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  {
+    item.galleryImages && item.galleryImages.length > 0 && (
+      <div
+        class="grid gap-[clamp(18px,2.5vw,32px)] md:col-span-2 md:mt-[clamp(16px,4vw,64px)] md:grid-cols-[1fr_1.45fr_0.8fr]"
+        aria-label={`${item.name}の写真`}
+      >
+        {item.galleryImages.map((galleryImage) => (
+          <figure class="m-0">
+            <img
+              class="block aspect-[1.28/1] w-full object-cover"
+              src={galleryImage.image.src}
+              alt={galleryImage.alt ?? item.name}
+              loading="lazy"
+              decoding="async"
+            />
+            {galleryImage.caption && (
+              <figcaption class="mt-2.5 text-[0.6875rem] leading-[1.6] text-[#4a4a45]">
+                {galleryImage.caption}
+              </figcaption>
+            )}
+          </figure>
+        ))}
+      </div>
+    )
+  }
+</article>
