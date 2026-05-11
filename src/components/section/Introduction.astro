@@ -3,7 +3,7 @@ import introductionImage from "../../assets/IMG_1165 1.png";
 ---
 
 <section
-  class="mt-16 bg-[#f4f4ef] px-30 py-30 text-neutral-950"
+  class="mt-16 bg-[#f4f4ef] px-30 py-50 text-neutral-950"
   aria-labelledby="introduction-title"
 >
   <div class="mx-auto grid max-w-7xl grid-cols-2 items-center gap-24">
@@ -70,7 +70,7 @@ import introductionImage from "../../assets/IMG_1165 1.png";
     const frameCenter = rect.top + rect.height / 2;
     const progress = (frameCenter - viewportCenter) / window.innerHeight;
     // パララックスエフェクトの移動量
-    const offset = Math.max(-1, Math.min(1, progress)) * -18;
+    const offset = Math.max(-1, Math.min(1, progress)) * -15;
 
     parallaxImage.style.transform = `translate3d(0, ${offset}%, 0) scale(1.1)`;
   };
