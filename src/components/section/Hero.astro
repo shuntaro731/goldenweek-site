@@ -7,7 +7,7 @@ import titleAomori from "../../assets/title/type=title1.svg";
 import titleMusashino from "../../assets/title/type=title2.svg";
 import titleChichu from "../../assets/title/type=title3.svg";
 
-// ImageViewerの中要素
+// 各museumごとのcaptionをすぐ取り出せるように
 const museums = [
   {
     name: "青森県立美術館",
@@ -43,7 +43,7 @@ const museumImages = museums.map((museum) => ({
 
 <section
   class="flex h-full shrink-0 bg-[#f3f2e8] pl-16"
-  aria-label="おすすめ美術館"
+  aria-label="polite"
 >
   <div id="hero-museum" class="relative flex-1 overflow-hidden bg-[#1a1a18]">
     <ImageViewer images={museumImages} interval={4000} />
@@ -130,6 +130,7 @@ const museumImages = museums.map((museum) => ({
 </script>
 
 <style>
+  /* ブラーアニメーション */
   .hero-blur-fade {
     opacity: 1;
     filter: blur(0);
