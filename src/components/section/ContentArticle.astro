@@ -48,7 +48,7 @@ const gallery = galleryLayouts[item.galleryLayout];
 ---
 
 <article
-  class="mx-[clamp(24px,7vw,112px)]"
+  class="min-w-0"
   aria-labelledby={`content-title-${index}`}
 >
   <header class="min-w-0">
@@ -61,7 +61,7 @@ const gallery = galleryLayouts[item.galleryLayout];
     </p>
     <h3 id={`content-title-${index}`} class="sr-only">{item.name}</h3>
     <img
-      class="block max-h-[clamp(70px,8vw,128px)] w-[min(100%,620px)] object-contain object-left"
+      class="block max-h-[clamp(56px,6vw,96px)] w-[min(100%,520px)] object-contain object-left"
       src={item.titleSvg.src}
       alt=""
       loading="lazy"

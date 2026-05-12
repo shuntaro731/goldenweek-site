@@ -16,20 +16,33 @@ const { items = museums } = Astro.props;
 >
   <div class="mx-auto w-[min(100%,1440px)]">
     <header
-      class="mx-[clamp(24px,7vw,112px)] mb-[clamp(56px,6vw,96px)] pt-[clamp(16px,2vw,32px)]"
+      class="mx-[clamp(24px,7vw,112px)] mb-[clamp(56px,6vw,96px)] flex items-start justify-between gap-8 pt-[clamp(16px,2vw,32px)]"
     >
-      <p class="mb-3.5 text-xs font-bold tracking-[0.14em] uppercase">
-        Museum Contents
-      </p>
-      <h2
-        id="contents-title"
-        class="m-0 text-[clamp(2rem,6vw,5.5rem)] leading-[0.95] font-extrabold"
+      <div class="flex min-w-0 items-baseline gap-[clamp(12px,1.6vw,24px)]">
+        <h2
+          id="contents-title"
+          class="m-0 text-[clamp(2.25rem,5vw,4.25rem)] leading-none font-medium tracking-normal uppercase"
+        >
+          Museum List
+        </h2>
+        <p
+          class="m-0 shrink-0 text-[clamp(0.875rem,1.1vw,1.125rem)] font-extrabold"
+        >
+          美術館リスト
+        </p>
+      </div>
+      <p
+        class="m-0 hidden text-right text-[clamp(0.875rem,1vw,1rem)] leading-[1.25] font-medium text-neutral-500 sm:block"
       >
-        行ってみたい美術館
-      </h2>
+        HAL<br />
+        Goldenweek for<br />
+        April 28 ~ May 6
+      </p>
     </header>
 
-    <div class="grid gap-[clamp(72px,9vw,144px)]">
+    <div
+      class="mx-[clamp(24px,7vw,112px)] grid gap-[clamp(72px,9vw,144px)]"
+    >
       {
         items.map((item, index) => (
           <ContentArticle item={item} index={index} total={items.length} />
