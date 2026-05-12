@@ -22,41 +22,6 @@ import "../styles/global.css";
   </body>
 </html>
 
-<script>
-  const parallaxImages = document.querySelectorAll<HTMLImageElement>(
-    "[data-parallax-image]",
-  );
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let frameId: number | null = null;
-
-  const updateParallax = () => {
-    frameId = null;
-
-    if (reduceMotion.matches) return;
-
-    parallaxImages.forEach((image) => {
-      const frame = image.parentElement;
-      if (!frame) return;
-
-      const rect = frame.getBoundingClientRect();
-      const viewportCenter = window.innerHeight / 2;
-      const frameCenter = rect.top + rect.height / 2;
-      const progress = (frameCenter - viewportCenter) / window.innerHeight;
-      const offset = Math.max(-1, Math.min(1, progress)) * -15;
-
-      image.style.transform = `translate3d(0, ${offset}%, 0) scale(1.1)`;
-    });
-  };
-
-  const requestParallaxUpdate = () => {
-    if (frameId !== null) return;
-    frameId = window.requestAnimationFrame(updateParallax);
-  };
-
-  window.addEventListener("scroll", requestParallaxUpdate, { passive: true });
-  window.addEventListener("resize", requestParallaxUpdate);
-  updateParallax();
-</script>
 
 <style>
   html {
@@ -68,7 +33,7 @@ import "../styles/global.css";
     leading-trim: both;
     text-edge: cap alphabetic;
   }
-
+  
   body {
     margin: 0;
     width: 100%;
@@ -80,3 +45,48 @@ import "../styles/global.css";
     text-edge: cap alphabetic;
   }
 </style>
+
+<!-- パララックスアニメーション : スクロール時に transform を更新 -->
+<script>
+  const parallaxImages = [
+    ...document.querySelectorAll<HTMLImageElement>("[data-parallax-image]"),
+  ];
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let ticking = false;
+
+  const updateParallaxImages = () => {
+    ticking = false;
+
+    if (reducedMotionQuery.matches) {
+      parallaxImages.forEach((image) => {
+        image.style.transform = "translate3d(0, 0, 0) scale(1.1)";
+      });
+      return;
+    }
+
+    const viewportHeight = window.innerHeight;
+
+    parallaxImages.forEach((image) => {
+      const rect = image.getBoundingClientRect();
+      const progress =
+        (viewportHeight - rect.top) / (viewportHeight + rect.height);
+      const clampedProgress = Math.min(Math.max(progress, 0), 1);
+      const offset = (clampedProgress - 0.5) * 16;
+
+      image.style.transform = `translate3d(0, ${offset}%, 0) scale(1.1)`;
+    });
+  };
+
+  const requestParallaxUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(updateParallaxImages);
+  };
+
+  if (parallaxImages.length > 0) {
+    updateParallaxImages();
+    window.addEventListener("scroll", requestParallaxUpdate, { passive: true });
+    window.addEventListener("resize", requestParallaxUpdate);
+    reducedMotionQuery.addEventListener("change", requestParallaxUpdate);
+  }
+</script>
