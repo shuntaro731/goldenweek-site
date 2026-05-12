@@ -52,44 +52,41 @@ const gallery = galleryLayouts[item.galleryLayout];
   <header>
     <h3 id={`content-title-${index}`} class="sr-only">{item.name}</h3>
     <img
-      class="h-14 w-auto max-w-full object-contain object-left"
+      class="h-16 w-auto max-w-full object-contain object-left"
       src={item.titleSvg.src}
       alt=""
       loading="lazy"
       decoding="async"
       aria-hidden="true"
     />
-    <p class="mt-5 text-sm font-normal md:text-xl">
+    <p class="mt-5 text-xl font-normal">
       {item.englishName}
     </p>
   </header>
 
-  <div class="mt-24 md:ml-35">
+  <div class="mt-32 md:ml-35">
     <div
-      class="mx-auto grid w-full max-w-6xl items-start gap-6 md:gap-16 lg:grid-cols-[minmax(0,1fr)_360px]"
+      class="mx-auto grid w-full max-w-6xl items-start gap-y-12 gap-x-17 lg:grid-cols-[minmax(0,1fr)_360px]"
     >
-    <!-- キャプション -->
-      <div>
-        <!-- 見出し2タイトル -->
-        <h2
-          class="whitespace-pre-line text-xl leading-[1.55] font-bold md:text-3xl"
-        >
-          {item.headline}
-        </h2>
-        <!-- 本文 -->
-        <p
-          class="mt-6 whitespace-pre-line text-sm leading-[1.85] font-medium tracking-[0.04em] md:text-base"
-        >
-          {item.body}
-        </p>
-      </div>
+      <!-- 見出し2タイトル -->
+      <h2
+        class="whitespace-pre-line text-3xl leading-[1.55] font-bold lg:col-start-1 lg:row-start-1"
+      >
+        {item.headline}
+      </h2>
+      <!-- 本文 -->
+      <p
+        class="whitespace-pre-line text-base leading-[1.85] font-medium tracking-[0.04em] lg:col-start-1 lg:row-start-2"
+      >
+        {item.body}
+      </p>
 
       <!-- 補足 -->
-      <dl class="border-y border-[#1a1a18] py-4">
+      <dl class="mt-4 border-y border-[#1a1a18] py-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0">
         {
           item.details.map((detail) => (
-            <div class="grid grid-cols-[5.5em_1fr] gap-4 py-1.5 text-sm leading-[1.7] md:text-base">
-              <dt class="font-extrabold">{detail.label}</dt>
+            <div class="grid grid-cols-[5.5em_1fr] gap-4 py-1.5 text-sm leading-[1.7]">
+              <dt class="font-bold">{detail.label}</dt>
               <dd class="whitespace-pre-line font-medium">{detail.value}</dd>
             </div>
           ))
@@ -97,7 +94,8 @@ const gallery = galleryLayouts[item.galleryLayout];
       </dl>
     </div>
 
-    <figure class="mx-auto mt-12 w-full max-w-6xl md:mt-24">
+    <!-- 画像 -->
+    <figure class="mx-auto mt-24 w-full max-w-6xl">
       <img
         class="aspect-[1.55/1] w-full object-cover"
         src={item.image.src}
@@ -113,7 +111,7 @@ const gallery = galleryLayouts[item.galleryLayout];
       item.galleryImages && item.galleryImages.length > 0 && (
         <div
           class:list={[
-            "mt-12 grid gap-6 md:mt-24 md:gap-12",
+            "mt-24 grid gap-12",
             gallery.wrap,
           ]}
           aria-label={`${item.name}の写真`}
@@ -151,6 +149,6 @@ const gallery = galleryLayouts[item.galleryLayout];
       )
     }
 
-    {index < total - 1 && <div class="mt-16 md:mt-28" />}
+    {index < total - 1 && <div class="mt-28" />}
   </div>
 </article>

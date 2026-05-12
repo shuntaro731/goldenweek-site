@@ -78,7 +78,7 @@ export const museums: Museum[] = [
     caption: "武蔵野美術館",
     details: [
       { label: "エリア", value: "東京都小平市" },
-      { label: "見どころ", value: "コレクション・企画展示・デザイン資料" },
+      { label: "見どころ", value: "コレクション・企画展示" },
     ],
     galleryLayout: "staggered",
     galleryImages: [
