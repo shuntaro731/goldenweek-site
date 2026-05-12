@@ -13,33 +13,33 @@ const { items = museums } = Astro.props;
 
 <section
   id="contents"
-  class="bg-[#F0F0E4] py-[clamp(72px,9vw,144px)] pb-[clamp(80px,10vw,160px)] text-[#1a1a18]"
+  class="bg-[#F0F0E4] py-20 pb-24 text-[#1a1a18] md:py-36 md:pb-40"
   aria-labelledby="contents-title"
 >
-  <div class="mx-auto w-[min(100%,1440px)]">
+  <div class="mx-auto w-full max-w-screen-2xl">
     <header
-      class="mx-[clamp(24px,7vw,112px)] mb-[clamp(56px,6vw,96px)] flex items-start justify-between gap-8 pt-[clamp(16px,2vw,32px)]"
+      class="mx-6 mb-14 flex items-start justify-between gap-8 pt-4 md:mx-28 md:mb-24 md:pt-8"
     >
-      <div class="flex min-w-0 items-baseline gap-[clamp(32px,1.6vw,48px)]">
+      <div class="flex min-w-0 flex-col gap-4 md:flex-row md:items-baseline md:gap-12">
         <h2
           id="contents-title"
-          class="text-[clamp(2rem,5vw,3rem)] leading-none font-medium uppercase"
+          class="text-4xl leading-none font-medium uppercase md:text-5xl"
         >
           Museum List
         </h2>
-        <p class="shrink-0 text-[clamp(0.875rem,1.1vw,1.125rem)] font-medium">
-            ( GWに行きたい美術館 )
+        <p class="shrink-0 text-sm font-medium md:text-lg">
+          ( GWに行きたい美術館 )
         </p>
       </div>
       <p
-        class="hidden text-right text-[clamp(0.875rem,1vw,1rem)] font-light text-neutral-400 sm:block"
+        class="hidden text-right text-sm font-light text-neutral-400 sm:block md:text-base"
       >
         HAL<br />
         Goldenweek for<br />
         April 28 ~ May 6
       </p>
     </header>
-    <div class="mx-[clamp(24px,7vw,112px)] grid gap-[clamp(72px,9vw,144px)]">
+    <div class="mx-6 grid gap-20 md:mx-28 md:gap-36">
       <!-- 美術館の記事要素 -->
       {
         items.map((item, index) => (
