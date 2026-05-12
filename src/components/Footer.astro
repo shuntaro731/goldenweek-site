@@ -5,17 +5,20 @@ const footerNavItems = [
   { label: "About", href: "#introduction" },
   { label: "Museum List", href: "#contents" },
   { label: "Top", href: "/" },
-  { label: "Contact", href: "mailto:info@example.com" },
 ];
 ---
 
-<footer class="bg-neutral-600 text-[#f3f2e8]" aria-labelledby="footer-logo">
+<footer class="mt-40 bg-neutral-600 text-[#f3f2e8]" aria-labelledby="footer-logo">
   <div
-    class="mx-auto grid min-h-[clamp(420px,48vw,620px)] w-[min(100%,1440px)] grid-rows-[1fr_auto] px-[clamp(32px,7vw,112px)] py-[clamp(56px,7vw,96px)]"
+    class="mx-auto grid w-[min(100%,1440px)] gap-16 px-[clamp(32px,7vw,112px)] py-[clamp(56px,7vw,96px)]"
   >
-    <div class="grid gap-16 md:grid-cols-[minmax(180px,1fr)_minmax(360px,1.35fr)]">
+    <div
+      class="grid gap-16 md:grid-cols-[minmax(180px,1fr)_minmax(360px,1.35fr)]"
+    >
       <nav aria-label="フッターナビゲーション">
-        <ul class="grid gap-6 text-[clamp(1.25rem,2vw,1.75rem)] leading-none font-medium">
+        <ul
+          class="grid gap-5 text-[clamp(1.125rem,1.6vw,1.5rem)] leading-none font-medium"
+        >
           {
             footerNavItems.map((item) => (
               <li>
@@ -35,49 +38,17 @@ const footerNavItems = [
         <a class="inline-block" href="/" aria-label="トップページへ">
           <img
             id="footer-logo"
-            class="footer-logo w-[min(62vw,420px)] md:w-[min(34vw,520px)]"
+            class="footer-logo w-[min(52vw,280px)] md:w-[min(24vw,360px)]"
             src={logo.src}
             alt="このゴールデンウィークは 日本の美術館へ"
           />
         </a>
-        <p class="mt-8 text-sm font-medium tracking-wide text-[#f3f2e8]/85">
-          Golden Week Museum Guide
-        </p>
       </div>
     </div>
 
-    <div
-      class="mt-16 grid gap-8 text-sm font-medium tracking-wide text-[#f3f2e8]/90 md:grid-cols-3 md:items-end"
-    >
-      <a
-        class="underline underline-offset-4 transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f3f2e8]"
-        href="/"
-      >
-        Privacy Policy
-      </a>
-      <p class="md:text-center">© 2026 Museum Guide. All Rights Reserved.</p>
-      <ul class="flex items-center gap-6 md:justify-end" aria-label="SNSリンク">
-        <li>Follow Us</li>
-        <li>
-          <a
-            class="text-xl leading-none transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f3f2e8]"
-            href="/"
-            aria-label="X"
-          >
-            X
-          </a>
-        </li>
-        <li>
-          <a
-            class="text-xl leading-none transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f3f2e8]"
-            href="/"
-            aria-label="Facebook"
-          >
-            f
-          </a>
-        </li>
-      </ul>
-    </div>
+    <p class="text-sm font-medium tracking-wide text-[#f3f2e8]/80">
+      © 2026 Museum Guide. All Rights Reserved.
+    </p>
   </div>
 </footer>
 

@@ -9,7 +9,6 @@ interface Props {
 
 const { item, index, total } = Astro.props as Props;
 const number = String(index + 1).padStart(2, "0");
-const totalCount = String(total).padStart(2, "0");
 
 // 各ギャラリーのカラムズcss
 const galleryLayouts = {
@@ -49,17 +48,8 @@ const gallery = galleryLayouts[item.galleryLayout];
 ---
 
 <!-- タイトル -->
-<article aria-labelledby={`content-title-${index}`}>
+<article aria-labelledby={`content-title-${index}`} class="mt-20">
   <header>
-    <p class="mb-4 flex items-baseline gap-1 font-medium tracking-[0.02em]">
-      <!-- <span class="text-[clamp(0.75rem,1vw,1rem)]">#</span>
-      <span class="text-[clamp(1.25rem,2.2vw,2.5rem)] leading-none">
-        {number}
-      </span>
-      <span class="text-[clamp(0.75rem,1vw,1rem)] text-neutral-400">
-        /{totalCount}
-      </span> -->
-    </p>
     <h3 id={`content-title-${index}`} class="sr-only">{item.name}</h3>
     <img
       class="h-14 w-auto max-w-full object-contain object-left"
@@ -69,12 +59,12 @@ const gallery = galleryLayouts[item.galleryLayout];
       decoding="async"
       aria-hidden="true"
     />
-    <p class="mt-3 text-[clamp(0.875rem,1.2vw,1.25rem)] font-medium">
+    <p class="mt-5 text-[clamp(0.875rem,1.2vw,1.25rem)] font-normal">
       {item.englishName}
     </p>
   </header>
 
-  <div class="ml-[clamp(0px,5vw,140px)] mt-[clamp(110px,5vw,90px)]">
+  <div class="ml-[clamp(0px,5vw,140px)] mt-[clamp(100px,5vw,80px)]">
     <div
       class="mx-auto grid w-[min(100%,1120px)] items-start gap-[clamp(24px,4vw,64px)] lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)]"
     >
