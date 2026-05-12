@@ -1,5 +1,5 @@
 ---
-import ContentArticle from "./ContentArticle.astro";
+import ContentArticle from "../ContentArticle.astro";
 import type { Museum } from "../../data/museums";
 import { museums } from "../../data/museums";
 
@@ -25,9 +25,7 @@ const { items = museums } = Astro.props;
         >
           Museum List
         </h2>
-        <p
-          class="shrink-0 text-[clamp(0.875rem,1.1vw,1.125rem)] font-medium"
-        >
+        <p class="shrink-0 text-[clamp(0.875rem,1.1vw,1.125rem)] font-medium">
           美術館リスト
         </p>
       </div>
@@ -39,10 +37,8 @@ const { items = museums } = Astro.props;
         April 28 ~ May 6
       </p>
     </header>
-    <div
-      class="mx-[clamp(24px,7vw,112px)] grid gap-[clamp(72px,9vw,144px)]"
-    >
-    <!-- 美術館の記事要素 -->
+    <div class="mx-[clamp(24px,7vw,112px)] grid gap-[clamp(72px,9vw,144px)]">
+      <!-- 美術館の記事要素 -->
       {
         items.map((item, index) => (
           <ContentArticle item={item} index={index} total={items.length} />

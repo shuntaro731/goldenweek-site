@@ -1,5 +1,5 @@
 ---
-import type { Museum } from "../../data/museums";
+import type { Museum } from "../data/museums";
 
 interface Props {
   item: Museum;
@@ -7,7 +7,7 @@ interface Props {
   total: number;
 }
 
-const { item, index, total } = Astro.props;
+const { item, index, total } = Astro.props as Props;
 const number = String(index + 1).padStart(2, "0");
 const totalCount = String(total).padStart(2, "0");
 
@@ -74,16 +74,19 @@ const gallery = galleryLayouts[item.galleryLayout];
     </p>
   </header>
 
-  <div class="ml-[clamp(0px,5vw,140px)] mt-[clamp(40px,5vw,72px)]">
+  <div class="ml-[clamp(0px,5vw,140px)] mt-[clamp(110px,5vw,90px)]">
     <div
       class="grid items-start gap-[clamp(24px,4vw,64px)] lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)] lg:pl-[clamp(72px,14vw,240px)]"
     >
-      <div class="min-w-0 pt-1">
-        <p
-          class="text-[clamp(1.25rem,1.7vw,1.75rem)] leading-[1.55] font-extrabold"
+    <!-- キャプション -->
+      <div>
+        <!-- 見出し2タイトル -->
+        <h2
+          class="text-[clamp(1.25rem,1.7vw,1.75rem)] leading-[1.55] font-bold"
         >
           {item.headline}
-        </p>
+        </h2>
+        <!-- 本文 -->
         <p
           class="mt-6 text-[clamp(0.875rem,1vw,1rem)] leading-[1.85] font-medium tracking-[0.04em]"
         >
@@ -91,6 +94,7 @@ const gallery = galleryLayouts[item.galleryLayout];
         </p>
       </div>
 
+      <!-- 補足ぶん -->
       <dl class="border-y border-[#1a1a18] py-4">
         {
           item.details.map((detail) => (
@@ -103,20 +107,18 @@ const gallery = galleryLayouts[item.galleryLayout];
       </dl>
     </div>
 
-    <figure
-      class="mx-auto mt-[clamp(48px,6vw,88px)] w-[min(100%,1120px)] overflow-hidden"
-    >
+    <figure class="mx-auto mt-[clamp(48px,6vw,88px)] w-[min(100%,1120px)]">
       <img
-        class="parallax-image aspect-[1.55/1] w-full object-cover"
+        class="aspect-[1.55/1] w-full object-cover"
         src={item.image.src}
         alt={item.name}
         loading="lazy"
         decoding="async"
-        data-parallax-image
       />
       <figcaption class="sr-only">{item.caption}</figcaption>
     </figure>
 
+    <!-- ギャラリー画像 -->
     {
       item.galleryImages && item.galleryImages.length > 0 && (
         <div
