@@ -21,28 +21,28 @@ const { items = museums } = Astro.props;
       <div class="flex min-w-0 items-baseline gap-[clamp(12px,1.6vw,24px)]">
         <h2
           id="contents-title"
-          class="m-0 text-[clamp(2.25rem,5vw,4.25rem)] leading-none font-medium tracking-normal uppercase"
+          class="text-[clamp(2rem,5vw,3rem)] leading-none font-medium uppercase"
         >
           Museum List
         </h2>
         <p
-          class="m-0 shrink-0 text-[clamp(0.875rem,1.1vw,1.125rem)] font-extrabold"
+          class="shrink-0 text-[clamp(0.875rem,1.1vw,1.125rem)] font-medium"
         >
           美術館リスト
         </p>
       </div>
       <p
-        class="m-0 hidden text-right text-[clamp(0.875rem,1vw,1rem)] leading-[1.25] font-medium text-neutral-500 sm:block"
+        class="hidden text-right text-[clamp(0.875rem,1vw,1rem)] font-light text-neutral-400 sm:block"
       >
         HAL<br />
         Goldenweek for<br />
         April 28 ~ May 6
       </p>
     </header>
-
     <div
       class="mx-[clamp(24px,7vw,112px)] grid gap-[clamp(72px,9vw,144px)]"
     >
+    <!-- 美術館の記事要素 -->
       {
         items.map((item, index) => (
           <ContentArticle item={item} index={index} total={items.length} />

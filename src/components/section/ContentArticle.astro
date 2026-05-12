@@ -11,6 +11,7 @@ const { item, index, total } = Astro.props;
 const number = String(index + 1).padStart(2, "0");
 const totalCount = String(total).padStart(2, "0");
 
+// 各ギャラリーのカラムズcss
 const galleryLayouts = {
   split: {
     wrap: "md:grid-cols-12 md:items-start",
@@ -47,21 +48,21 @@ const galleryLayouts = {
 const gallery = galleryLayouts[item.galleryLayout];
 ---
 
-<article
-  class="min-w-0"
-  aria-labelledby={`content-title-${index}`}
->
-  <header class="min-w-0">
-    <p class="mb-5 flex items-baseline gap-1.5 font-bold tracking-[0.02em]">
-      <span class="text-[clamp(1rem,1.7vw,1.5rem)]">#</span>
-      <span class="text-[clamp(2rem,4vw,4rem)] leading-none">{number}</span>
-      <span class="text-[clamp(1rem,1.7vw,1.5rem)] text-neutral-500">
+<!-- タイトル -->
+<article aria-labelledby={`content-title-${index}`}>
+  <header>
+    <p class="mb-4 flex items-baseline gap-1 font-medium tracking-[0.02em]">
+      <span class="text-[clamp(0.75rem,1vw,1rem)]">#</span>
+      <span class="text-[clamp(1.25rem,2.2vw,2.5rem)] leading-none">
+        {number}
+      </span>
+      <span class="text-[clamp(0.75rem,1vw,1rem)] text-neutral-400">
         /{totalCount}
       </span>
     </p>
     <h3 id={`content-title-${index}`} class="sr-only">{item.name}</h3>
     <img
-      class="block max-h-[clamp(56px,6vw,96px)] w-[min(100%,520px)] object-contain object-left"
+      class="h-14 w-auto max-w-full object-contain object-left"
       src={item.titleSvg.src}
       alt=""
       loading="lazy"
@@ -79,7 +80,7 @@ const gallery = galleryLayouts[item.galleryLayout];
     >
       <div class="min-w-0 pt-1">
         <p
-          class="m-0 text-[clamp(1.25rem,1.7vw,1.75rem)] leading-[1.55] font-extrabold"
+          class="text-[clamp(1.25rem,1.7vw,1.75rem)] leading-[1.55] font-extrabold"
         >
           {item.headline}
         </p>
@@ -90,25 +91,28 @@ const gallery = galleryLayouts[item.galleryLayout];
         </p>
       </div>
 
-      <dl class="m-0 border-y border-[#1a1a18] py-4">
+      <dl class="border-y border-[#1a1a18] py-4">
         {
           item.details.map((detail) => (
             <div class="grid grid-cols-[5.5em_1fr] gap-4 py-1.5 text-[clamp(0.8125rem,0.9vw,0.9375rem)] leading-[1.7]">
               <dt class="font-extrabold">{detail.label}</dt>
-              <dd class="m-0 font-medium">{detail.value}</dd>
+              <dd class="font-medium">{detail.value}</dd>
             </div>
           ))
         }
       </dl>
     </div>
 
-    <figure class="mx-auto mt-[clamp(48px,6vw,88px)] w-[min(100%,1120px)]">
+    <figure
+      class="mx-auto mt-[clamp(48px,6vw,88px)] w-[min(100%,1120px)] overflow-hidden"
+    >
       <img
-        class="block aspect-[1.55/1] w-full object-cover"
+        class="parallax-image aspect-[1.55/1] w-full object-cover"
         src={item.image.src}
         alt={item.name}
         loading="lazy"
         decoding="async"
+        data-parallax-image
       />
       <figcaption class="sr-only">{item.caption}</figcaption>
     </figure>
@@ -125,13 +129,13 @@ const gallery = galleryLayouts[item.galleryLayout];
           {item.galleryImages.map((galleryImage, galleryIndex) => (
             <figure
               class:list={[
-                "m-0",
+                "overflow-hidden",
                 gallery.items[galleryIndex] ?? "md:col-span-4",
               ]}
             >
               <img
                 class:list={[
-                  "block w-full object-cover",
+                  "parallax-image w-full object-cover",
                   galleryIndex === 0
                     ? "aspect-[1.45/1]"
                     : galleryIndex === 3
@@ -142,6 +146,7 @@ const gallery = galleryLayouts[item.galleryLayout];
                 alt={galleryImage.alt ?? item.name}
                 loading="lazy"
                 decoding="async"
+                data-parallax-image
               />
               {galleryImage.caption && (
                 <figcaption class="mt-2.5 text-[0.6875rem] leading-[1.6] text-[#4a4a45]">

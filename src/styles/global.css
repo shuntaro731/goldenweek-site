@@ -23,3 +23,9 @@ body {
 .index-background {
   background-color: var(--color-index-background);
 }
+
+.parallax-image {
+  transform: translate3d(0, 0, 0) scale(1.1);
+  transform-origin: center;
+  will-change: transform;
+}
