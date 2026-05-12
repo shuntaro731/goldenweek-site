@@ -2,12 +2,9 @@
 import logo from "../assets/logo.svg";
 ---
 
-<header class="index-background relative flex justify-between px-16 py-15">
+<header class="index-background relative z-20 flex justify-between px-16 py-15">
   <a href="/" aria-label="トップページへ">
-    <img
-      src={logo.src}
-      alt="このゴールデンウィークは 日本の美術館へ"
-    />
+    <img src={logo.src} alt="このゴールデンウィークは 日本の美術館へ" />
   </a>
 
   <!-- メニューバー -->
@@ -21,7 +18,7 @@ import logo from "../assets/logo.svg";
       aria-controls="site-menu"
     >
       <svg
-        class="size-10 "
+        class="size-10"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
@@ -32,18 +29,33 @@ import logo from "../assets/logo.svg";
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-        />
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
       </svg>
     </button>
 
     <!-- 展開nav -->
     <div
       id="site-menu"
-      class="absolute top-full right-0 mt-6 min-w-40 bg-[#1a1a18] px-5 py-4 text-right"
+      class="absolute top-full right-0 mt-6 min-w-44 bg-[#1a1a18] px-5 py-4 text-right"
       hidden
     >
-      <a class="font-bold text-[#f3f2e8] no-underline" href="/">Top</a>
+      <ul class="flex flex-col gap-3 text-sm font-medium">
+        <li>
+          <a class="block text-[#f3f2e8] no-underline" href="#hero-museum"
+            >Top</a
+          >
+        </li>
+        <li>
+          <a class="block text-[#f3f2e8] no-underline" href="#introduction"
+            >Introduction</a
+          >
+        </li>
+        <li>
+          <a class="block text-[#f3f2e8] no-underline" href="#contents"
+            >Museum List</a
+          >
+        </li>
+      </ul>
     </div>
   </nav>
 </header>
@@ -65,5 +77,14 @@ import logo from "../assets/logo.svg";
     if (menu) {
       menu.hidden = isOpen;
     }
+  });
+
+  menu?.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLAnchorElement)) return;
+
+    menu.hidden = true;
+    menuButton?.setAttribute("aria-expanded", "false");
+    menuButton?.setAttribute("aria-label", "メニューを開く");
   });
 </script>
